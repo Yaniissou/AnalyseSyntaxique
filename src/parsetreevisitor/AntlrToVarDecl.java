@@ -13,13 +13,14 @@ public class AntlrToVarDecl extends ArrayOperationsBaseVisitor<VariableDeclarati
     public final Map<String, VariableDeclaration<?>> symbolTable;
     public final List<String> semanticErrors;
 
-    public AntlrToVarDecl(final Map<String, VariableDeclaration<?>> symbolTable, final List<String> semanticErrors){
+    public AntlrToVarDecl(final Map<String, VariableDeclaration<?>> symbolTable, final List<String> semanticErrors) {
         this.semanticErrors = semanticErrors;
         this.symbolTable = symbolTable;
     }
 
     /**
      * | ARRAY_TYPE ID '=' array ';' #initvararray
+     *
      * @param ctx the parse tree
      */
     @Override
@@ -28,6 +29,12 @@ public class AntlrToVarDecl extends ArrayOperationsBaseVisitor<VariableDeclarati
 
         final String arrayType = ctx.getChild(0).getText();
         final String id = ctx.getChild(1).getText();
+
+        //Semantic error handling: Variables cannot be re-declared
+        if (symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " cannot be re-declared");
+            return null;
+        }
 
         final ArrayList<Integer> array = antlrToArray.visit(ctx.getChild(3));
 
@@ -38,12 +45,20 @@ public class AntlrToVarDecl extends ArrayOperationsBaseVisitor<VariableDeclarati
 
     /**
      * ARRAY_TYPE ID ';'     #vararray
+     *
      * @param ctx the parse tree
      */
     @Override
     public VariableDeclaration<Object> visitVararray(ArrayOperationsParser.VararrayContext ctx) {
         final String arrayType = ctx.getChild(0).getText();
         final String id = ctx.getChild(1).getText();
+
+        //Semantic error handling: Variables cannot be re-declared
+        if (symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " cannot be re-declared");
+            return null;
+        }
+
         VariableDeclaration<Object> declaration = new VariableDeclaration<>(id, arrayType);
         this.symbolTable.put(id, declaration);
         return declaration;
@@ -51,12 +66,19 @@ public class AntlrToVarDecl extends ArrayOperationsBaseVisitor<VariableDeclarati
 
     /**
      * INT_TYPE ID ';'
+     *
      * @param ctx the parse tree
      */
     @Override
     public VariableDeclaration<Object> visitVarint(ArrayOperationsParser.VarintContext ctx) {
         final String intType = ctx.getChild(0).getText();
         final String id = ctx.getChild(1).getText();
+
+        //Semantic error handling: Variables cannot be re-declared
+        if (symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " cannot be re-declared");
+            return null;
+        }
 
         VariableDeclaration<Object> declaration = new VariableDeclaration<>(id, intType);
         this.symbolTable.put(id, declaration);
@@ -65,12 +87,20 @@ public class AntlrToVarDecl extends ArrayOperationsBaseVisitor<VariableDeclarati
 
     /**
      * INT_TYPE ID '=' INT ';'
+     *
      * @param ctx the parse tree
      */
     @Override
     public VariableDeclaration<Object> visitInitvarint(ArrayOperationsParser.InitvarintContext ctx) {
         final String intType = ctx.getChild(0).getText();
         final String id = ctx.getChild(1).getText();
+
+        //Semantic error handling: Variables cannot be re-declared
+        if (symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " cannot be re-declared");
+            return null;
+        }
+
         final int value = Integer.parseInt(ctx.getChild(3).getText());
 
         final VariableDeclaration<Object> declaration = new VariableDeclaration<>(id, intType, value);

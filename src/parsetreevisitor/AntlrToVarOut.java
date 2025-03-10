@@ -15,7 +15,7 @@ public class AntlrToVarOut extends ArrayOperationsBaseVisitor<VarOut> {
     public final Map<String, VariableDeclaration<?>> symbolTable;
     public final List<String> semanticErrors;
 
-    public AntlrToVarOut(final Map<String, VariableDeclaration<?>> symbolTable, final List<String> semanticErrors){
+    public AntlrToVarOut(final Map<String, VariableDeclaration<?>> symbolTable, final List<String> semanticErrors) {
         this.symbolTable = symbolTable;
         this.semanticErrors = semanticErrors;
     }
@@ -30,10 +30,10 @@ public class AntlrToVarOut extends ArrayOperationsBaseVisitor<VarOut> {
         final String id = ctx.getChild(0).getText();
 
         if (!symbolTable.containsKey(id)) {
-            semanticErrors.add("id " + id + "doesn't exists");
+            semanticErrors.add("Id " + id + "doesn't exists");
             return null;
-        } else {
-            return new VarOut(id);
         }
+        return new VarOut(id);
+
     }
 }

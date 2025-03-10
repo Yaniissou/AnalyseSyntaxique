@@ -5,7 +5,7 @@ import evaluationWithVisitor.ArrayOperationsVisitor;
 public class Max extends SimpleOp {
 
     public Max() {
-        super();
+        super(ResultType.INTEGER);
     }
 
     @Override

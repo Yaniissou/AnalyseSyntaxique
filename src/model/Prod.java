@@ -5,7 +5,7 @@ import evaluationWithVisitor.ArrayOperationsVisitor;
 public class Prod extends SimpleOp {
 
     public Prod() {
-        super();
+        super(ResultType.INTEGER);
     }
 
     @Override

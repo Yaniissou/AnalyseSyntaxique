@@ -23,14 +23,22 @@ public class SimpleOpApp {
             ArrayOperationsParser parser = getParser(fileName);
             // build the parse tree (begin parsing at input rule ‘exprs’)
             ParseTree tree = parser.program();
-            if (SyntaxErrorListener.hasError){
+            if (SyntaxErrorListener.hasError) {
 
             } else {
                 // build the visitor for the first named rule
                 AntlrToProgram inputVisitor = new AntlrToProgram();
+
+
+
                 // use this visitor to visit the parse tree
                 // this visitor produce a Model object
                 Program result = inputVisitor.visit(tree);
+                for (String semanticError : inputVisitor.semanticErrors) {
+                    System.out.println(semanticError);
+                }
+
+                if (!inputVisitor.semanticErrors.isEmpty()) return; //Stop the code if they're semantic errors
                 //Print the model
                 System.out.println("The model printed using a pretty print of the Model classes:");
                 System.out.println(result.instructions);

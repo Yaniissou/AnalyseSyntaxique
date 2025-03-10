@@ -27,4 +27,8 @@ public class VariableDeclaration<T> extends Instruction {
     public T getValue() {
         return this.value;
     }
+
+    public String getType() {
+        return type;
+    }
 }

@@ -30,8 +30,24 @@ public class AntlrToAffectation extends ArrayOperationsBaseVisitor<Affectation<?
         final AntlrToSimpleOp antlrToSimpleOp = new AntlrToSimpleOp();
 
         final String id = ctx.getChild(0).getText();
+
+        //Semantic error handling: Value must be a declared variable
+        if (!symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " must be declared");
+            return null;
+        }
+
         final SimpleOp simpleop = antlrToSimpleOp.visit(ctx.getChild(2));
-        return new Affectation<>(id, simpleop);
+        final String valueType = simpleop.getResultType().getTextType();
+        String varType = symbolTable.get(id).getType();
+
+        //Semantic error handling: value and variable type must be the same
+        if (!varType.equals(valueType)) {
+            semanticErrors.add("Trying to set a " + valueType + " to a " + varType + " type variable");
+            return null;
+        }
+
+         return new Affectation<>(id, simpleop);
     }
 
     /**
@@ -43,6 +59,19 @@ public class AntlrToAffectation extends ArrayOperationsBaseVisitor<Affectation<?
         final AntlrToArray antlrToArray = new AntlrToArray();
 
         final String id = ctx.getChild(0).getText();
+
+        //Semantic error handling: Value must be a declared variable
+        if (!symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " must be declared");
+            return null;
+        }
+
+        String varType = symbolTable.get(id).getType();
+        //Semantic error handling: variable type must be an array
+        if (!varType.equals("array")) {
+            semanticErrors.add(varType + " must be an array");
+            return null;
+        }
         final ArrayList<Integer> array = antlrToArray.visit(ctx.getChild(2));
 
         return new Affectation<>(id, array);
@@ -55,6 +84,19 @@ public class AntlrToAffectation extends ArrayOperationsBaseVisitor<Affectation<?
     @Override
     public Affectation<?> visitAffectint(ArrayOperationsParser.AffectintContext ctx) {
         final String id = ctx.getChild(0).getText();
+
+        //Semantic error handling: Value must be a declared variable
+        if (!symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " must be declared");
+            return null;
+        }
+
+        String varType = symbolTable.get(id).getType();
+        //Semantic error handling: variable type must be an int
+        if (!varType.equals("int")) {
+            semanticErrors.add(varType + " must be an int");
+            return null;
+        }
         final int value = Integer.parseInt(ctx.getChild(2).getText());
 
         return new Affectation<>(id, value);

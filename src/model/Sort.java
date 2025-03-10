@@ -5,7 +5,7 @@ import evaluationWithVisitor.ArrayOperationsVisitor;
 public class Sort extends SimpleOp {
 
     public Sort() {
-        super();
+        super(ResultType.ARRAY);
     }
 
     @Override

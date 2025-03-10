@@ -24,14 +24,13 @@ public class AntlrToProgram extends ArrayOperationsBaseVisitor<Program> {
     @Override
     public Program visitProgram(ArrayOperationsParser.ProgramContext ctx) {
         // program : (simpleop)+ EOF;
-
+        AntlrToInstruction antlrToInstruction = new AntlrToInstruction(symbolTable, semanticErrors);
         Program program = new Program();
-        AntlrToSimpleOp visitor = new AntlrToSimpleOp();
 
         for (int i = 0; i < ctx.children.size()-1; i++) {
-            ParseTree currentParseTree = ctx.children.get(i);
-            program.addInstruction(currentParseTree.accept(visitor));
+            program.addInstruction(antlrToInstruction.visit(ctx.getChild(i)));
         }
+
         return program;
     }
 }

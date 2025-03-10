@@ -5,7 +5,7 @@ import evaluationWithVisitor.ArrayOperationsVisitor;
 public class Min extends SimpleOp {
 
     public Min() {
-        super();
+        super(ResultType.INTEGER);
     }
 
     @Override

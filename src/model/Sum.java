@@ -4,7 +4,7 @@ import evaluationWithVisitor.ArrayOperationsVisitor;
 
 public class Sum extends SimpleOp {
     public Sum() {
-        super();
+        super(ResultType.INTEGER);
     }
 
     @Override
