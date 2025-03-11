@@ -126,6 +126,18 @@ public interface ArrayOperationsListener extends ParseTreeListener {
 	 */
 	void exitSort(ArrayOperationsParser.SortContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code med}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 */
+	void enterMed(ArrayOperationsParser.MedContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code med}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 */
+	void exitMed(ArrayOperationsParser.MedContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code vararray}
 	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.
 	 * @param ctx the parse tree

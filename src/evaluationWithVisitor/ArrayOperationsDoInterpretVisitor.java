@@ -67,4 +67,10 @@ public class ArrayOperationsDoInterpretVisitor implements ArrayOperationsVisitor
     public Object visit(VarOut varOut) {
         return varOut.getId();
     }
+
+    @Override
+    public Object visit(Median median) {
+        final ArrayList<Integer> data = median.getData();
+        return data.get(data.size()/2);
+    }
 }

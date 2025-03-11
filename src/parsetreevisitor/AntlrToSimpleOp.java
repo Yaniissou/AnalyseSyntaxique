@@ -59,4 +59,13 @@ public class AntlrToSimpleOp extends ArrayOperationsBaseVisitor<SimpleOp> {
         return sum;
     }
 
+    @Override
+    public SimpleOp visitMed(ArrayOperationsParser.MedContext ctx) {
+        final AntlrToArray antlrToArray = new AntlrToArray();
+        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
+
+        final Median median = new Median();
+        median.setData(accept);
+        return median;
+    }
 }

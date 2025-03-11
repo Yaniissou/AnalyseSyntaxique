@@ -80,6 +80,13 @@ public interface ArrayOperationsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSort(ArrayOperationsParser.SortContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code med}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMed(ArrayOperationsParser.MedContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code vararray}
 	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.
 	 * @param ctx the parse tree

@@ -13,4 +13,5 @@ public interface ArrayOperationsVisitor<R> {
     R visit(VariableDeclaration<?> variable);
     R visit(Affectation<?> affectation);
     R visit(VarOut varOut);
+    R visit(Median median);
 }
