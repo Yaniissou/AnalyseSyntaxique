@@ -26,7 +26,7 @@ public class AntlrToAffectation extends ArrayOperationsBaseVisitor<Affectation<?
      */
     @Override
     public Affectation<?> visitAffectsimpleop(ArrayOperationsParser.AffectsimpleopContext ctx) {
-        final AntlrToSimpleOp antlrToSimpleOp = new AntlrToSimpleOp();
+        final AntlrToSimpleOp antlrToSimpleOp = new AntlrToSimpleOp(symbolTable, semanticErrors);
 
         final String id = ctx.getChild(0).getText();
 

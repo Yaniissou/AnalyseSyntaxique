@@ -21,7 +21,7 @@ public class AntlrToInstruction extends ArrayOperationsBaseVisitor<Instruction> 
 
     @Override
     public SimpleOp visitSimpleopinstruction(ArrayOperationsParser.SimpleopinstructionContext ctx) {
-        final AntlrToSimpleOp antlrToSimpleOp = new AntlrToSimpleOp();
+        final AntlrToSimpleOp antlrToSimpleOp = new AntlrToSimpleOp(symbolTable, semanticErrors);
         return antlrToSimpleOp.visit(ctx);
     }
 

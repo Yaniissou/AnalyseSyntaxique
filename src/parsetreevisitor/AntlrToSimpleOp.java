@@ -5,87 +5,89 @@ import antlr.ArrayOperationsParser;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class AntlrToSimpleOp extends ArrayOperationsBaseVisitor<SimpleOp> {
 
+    final Map<String, VariableDeclaration<?>> symbolTable;
+    final List<String> semanticErrors;
+
+    public AntlrToSimpleOp(Map<String, VariableDeclaration<?>> symbolTable, List<String> semanticErrors) {
+        this.symbolTable = symbolTable;
+        this.semanticErrors = semanticErrors;
+    }
 
     @Override
     public SimpleOp visitMax(ArrayOperationsParser.MaxContext ctx) {
-        final AntlrToArray antlrToArray = new AntlrToArray();
-        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
-        final Max max = new Max();
-        max.setData(accept);
-        return max;
-
+        return createSimpleOp(new Max(), ctx);
     }
 
     @Override
     public SimpleOp visitMin(ArrayOperationsParser.MinContext ctx) {
-        final AntlrToArray antlrToArray = new AntlrToArray();
-        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
-
-        final Min min = new Min();
-        min.setData(accept);
-        return min;
+        return createSimpleOp(new Min(), ctx);
     }
 
     @Override
     public SimpleOp visitProd(ArrayOperationsParser.ProdContext ctx) {
-        final AntlrToArray antlrToArray = new AntlrToArray();
-        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
-
-        final Prod prod = new Prod();
-        prod.setData(accept);
-        return prod;
+        return createSimpleOp(new Prod(), ctx);
     }
 
     @Override
     public SimpleOp visitSort(ArrayOperationsParser.SortContext ctx) {
-        final AntlrToArray antlrToArray = new AntlrToArray();
-        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
-
-        final Sort sort = new Sort();
-        sort.setData(accept);
-        return sort;
+        return createSimpleOp(new Sort(), ctx);
     }
 
     @Override
     public SimpleOp visitSum(ArrayOperationsParser.SumContext ctx) {
-        final AntlrToArray antlrToArray = new AntlrToArray();
-        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
-
-        final Sum sum = new Sum();
-        sum.setData(accept);
-        return sum;
+        return createSimpleOp(new Sum(), ctx);
     }
 
     @Override
     public SimpleOp visitMed(ArrayOperationsParser.MedContext ctx) {
-        final AntlrToArray antlrToArray = new AntlrToArray();
-        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
-
-        final Median median = new Median();
-        median.setData(accept);
-        return median;
+        return createSimpleOp(new Median(), ctx);
     }
 
     @Override
     public SimpleOp visitSecmax(ArrayOperationsParser.SecmaxContext ctx) {
-        final AntlrToArray antlrToArray = new AntlrToArray();
-        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
-
-        final SecondMax secondMax = new SecondMax();
-        secondMax.setData(accept);
-        return secondMax;
+        return createSimpleOp(new SecondMax(), ctx);
     }
 
     @Override
     public SimpleOp visitSecmin(ArrayOperationsParser.SecminContext ctx) {
-        final AntlrToArray antlrToArray = new AntlrToArray();
-        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
+        return createSimpleOp(new SecondMin(), ctx);
+    }
 
-        final SecondMin secondMin = new SecondMin();
-        secondMin.setData(accept);
-        return secondMin;
+    /**
+     * Generic function for every visit function
+     */
+    private SimpleOp createSimpleOp(SimpleOp operation, ArrayOperationsParser.SimpleopContext ctx) {
+        if (ctx.getChild(1).getChildCount() > 0) {
+            // Explicit array case
+            final AntlrToArray antlrToArray = new AntlrToArray();
+            final ArrayList<Integer> data = ctx.getChild(1).accept(antlrToArray);
+            operation.setData(data);
+        } else {
+            // ID case (var)
+            String variableName = ctx.getChild(1).getText();
+            VariableDeclaration<?> variableDeclaration = this.symbolTable.get(variableName);
+
+            //Semantic error handling: Variable must be declared
+            if (variableDeclaration == null) {
+                this.semanticErrors.add("Variable " + variableName + " not declared");
+                return null;
+            }
+
+            //Semantic error handling: Variable must be an array
+            if (!variableDeclaration.getType().equals("array")) {
+                this.semanticErrors.add("Variable " + variableName + " is not an array");
+                return null;
+            }
+
+            final ArrayList<Integer> value = (ArrayList<Integer>) variableDeclaration.getValue();
+            operation.setData(value);
+        }
+        return operation;
+
     }
 }
