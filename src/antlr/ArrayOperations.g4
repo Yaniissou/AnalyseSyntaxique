@@ -15,14 +15,14 @@ instruction     :   simpleop        #simpleopinstruction
                 |   varout          #varoutinstruction
                 ;
 
-simpleop        : SUM   array   ';'     #sum
-                | PROD  array   ';'     #prod
-                | MAX   array   ';'     #max
-                | MIN   array   ';'     #min
-                | SORT  array   ';'     #sort
-                | MED   array   ';'     #med
-                | SECMIN array  ';'     #secmin
-                | SECMAX array  ';'     #secmax
+simpleop        : SUM   (array | ID)   ';'     #sum
+                | PROD  (array | ID)   ';'     #prod
+                | MAX   (array | ID)   ';'     #max
+                | MIN   (array | ID)   ';'     #min
+                | SORT  (array | ID)   ';'     #sort
+                | MED   (array | ID)   ';'     #med
+                | SECMIN (array | ID)  ';'     #secmin
+                | SECMAX (array | ID)  ';'     #secmax
                 ;
 
 vardecl         : ARRAY_TYPE ID ';'     #vararray
