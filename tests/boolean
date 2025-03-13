@@ -1,0 +1,7 @@
+bool var2 = true;
+
+bool var3;
+
+var3 = false;
+
+var3;

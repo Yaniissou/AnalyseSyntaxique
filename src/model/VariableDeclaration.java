@@ -24,11 +24,20 @@ public class VariableDeclaration<T> extends Instruction {
         return visitor.visit(this);
     }
 
+    public String getId() {
+        return id;
+    }
+
     public T getValue() {
         return this.value;
     }
 
     public String getType() {
         return type;
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + type + " " + value;
     }
 }

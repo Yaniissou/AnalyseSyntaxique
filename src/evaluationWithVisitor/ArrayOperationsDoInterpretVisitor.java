@@ -4,13 +4,16 @@ import model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArrayOperationsDoInterpretVisitor implements ArrayOperationsVisitor<Object> {
 
-    private final ArrayList<Object> values;
+    public final Map<String, Variable<?>> symbolTable;
+
 
     public ArrayOperationsDoInterpretVisitor(){
-        this.values = new ArrayList<>();
+        this.symbolTable = new HashMap<>();
     }
 
     @Override
@@ -54,18 +57,33 @@ public class ArrayOperationsDoInterpretVisitor implements ArrayOperationsVisitor
     }
 
     @Override
-    public Object visit(VariableDeclaration<?> variable) {
+    public Object visit(VariableDeclaration<?> variableDeclaration) {
+        final Variable<Object> variable = new Variable<>(variableDeclaration.getId(), variableDeclaration.getType());
+        variable.setValue(variableDeclaration.getValue());
+        symbolTable.put(variable.getID(), variable);
+
         return variable.getValue();
     }
 
     @Override
     public Object visit(Affectation<?> affectation) {
-        return affectation.getValue();
+;        final Variable<Object> variable = ((Variable<Object>) symbolTable.get(affectation.getId()));
+        final Object value;
+
+        if (affectation.getValue() instanceof SimpleOp) {
+            value = ((SimpleOp) affectation.getValue()).accept(this);
+        }
+        else {
+            value = affectation.getValue();
+        }
+
+        variable.setValue(value);
+        return value;
     }
 
     @Override
     public Object visit(VarOut varOut) {
-        return varOut.getId();
+        return symbolTable.get(varOut.getId()).getValue();
     }
 
     @Override

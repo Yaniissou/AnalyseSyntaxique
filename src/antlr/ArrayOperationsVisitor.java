@@ -129,6 +129,20 @@ public interface ArrayOperationsVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInitvarint(ArrayOperationsParser.InitvarintContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code varbool}
+	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarbool(ArrayOperationsParser.VarboolContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code initvarbool}
+	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitvarbool(ArrayOperationsParser.InitvarboolContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code affectsimpleop}
 	 * labeled alternative in {@link ArrayOperationsParser#affectation}.
 	 * @param ctx the parse tree
@@ -149,6 +163,13 @@ public interface ArrayOperationsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAffectint(ArrayOperationsParser.AffectintContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code affectbool}
+	 * labeled alternative in {@link ArrayOperationsParser#affectation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAffectbool(ArrayOperationsParser.AffectboolContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ArrayOperationsParser#varout}.
 	 * @param ctx the parse tree

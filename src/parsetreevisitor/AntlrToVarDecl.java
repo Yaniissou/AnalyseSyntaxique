@@ -107,4 +107,48 @@ public class AntlrToVarDecl extends ArrayOperationsBaseVisitor<VariableDeclarati
         this.symbolTable.put(id, declaration);
         return declaration;
     }
+
+    /**
+     * BOOL_TYPE ID ';'
+     *
+     * @param ctx the parse tree
+     */
+    @Override
+    public VariableDeclaration<Object> visitVarbool(ArrayOperationsParser.VarboolContext ctx) {
+        final String id = ctx.getChild(1).getText();
+
+        //Semantic error handling: Variables cannot be redeclared
+        if (symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " cannot be re-declared");
+            return null;
+        }
+
+        final VariableDeclaration<Object> declaration = new VariableDeclaration<>(id, "bool");
+        this.symbolTable.put(id, declaration);
+        return declaration;
+    }
+
+    /**
+     * BOOL_TYPE ID '=' BOOL ';'
+     *
+     * @param ctx the parse tree
+     */
+    @Override
+    public VariableDeclaration<Object> visitInitvarbool(ArrayOperationsParser.InitvarboolContext ctx) {
+        final String boolType = ctx.getChild(3).getText();
+        final String id = ctx.getChild(1
+        ).getText();
+
+        //Semantic error handling: Variables cannot be redeclared
+        if (symbolTable.containsKey(id)
+        ) {
+            semanticErrors.add("Var " + id + " cannot be re-declared");
+            return null;
+        }
+
+        final boolean value = Boolean.parseBoolean(boolType);
+        final VariableDeclaration<Object> declaration = new VariableDeclaration<>(id, "bool", value);
+        this.symbolTable.put(id, declaration);
+        return declaration;
+    }
 }

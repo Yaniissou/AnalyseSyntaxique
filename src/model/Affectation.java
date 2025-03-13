@@ -15,6 +15,10 @@ public class Affectation<T> extends Instruction {
         return value;
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public Object accept(ArrayOperationsVisitor<?> visitor) {
         return visitor.visit(this);

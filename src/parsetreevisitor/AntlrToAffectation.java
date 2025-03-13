@@ -100,4 +100,34 @@ public class AntlrToAffectation extends ArrayOperationsBaseVisitor<Affectation<?
 
         return new Affectation<>(id, value);
     }
+
+    /**
+     * ID '=' BOOL ';'
+     *
+     * @param ctx the parse tree
+     */
+    @Override
+    public Affectation<?> visitAffectbool(ArrayOperationsParser.AffectboolContext ctx) {
+        final String id = ctx.getChild(0).getText();
+
+        //Semantic error handling: Value must be a declared variable
+        if (!symbolTable.containsKey(id)) {
+            semanticErrors.add("Var " + id + " must be declared");
+            return null;
+        }
+
+        final String varType = symbolTable.get(id).getType();
+        //Semantic error handling: variable type must be an int
+        if (!varType.equals("bool")) {
+            semanticErrors.add(varType + " must be a bool");
+            return null;
+        }
+
+        final String boolType = ctx.getChild(2).getText();
+        final boolean value = Boolean.parseBoolean(boolType);
+        System.out.println("boolType: " + boolType + " value: " + value);
+        return new Affectation<>(id, value);
+    }
+
+
 }

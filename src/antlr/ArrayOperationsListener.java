@@ -210,6 +210,30 @@ public interface ArrayOperationsListener extends ParseTreeListener {
 	 */
 	void exitInitvarint(ArrayOperationsParser.InitvarintContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code varbool}
+	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarbool(ArrayOperationsParser.VarboolContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code varbool}
+	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarbool(ArrayOperationsParser.VarboolContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code initvarbool}
+	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitvarbool(ArrayOperationsParser.InitvarboolContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code initvarbool}
+	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitvarbool(ArrayOperationsParser.InitvarboolContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code affectsimpleop}
 	 * labeled alternative in {@link ArrayOperationsParser#affectation}.
 	 * @param ctx the parse tree
@@ -245,6 +269,18 @@ public interface ArrayOperationsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAffectint(ArrayOperationsParser.AffectintContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code affectbool}
+	 * labeled alternative in {@link ArrayOperationsParser#affectation}.
+	 * @param ctx the parse tree
+	 */
+	void enterAffectbool(ArrayOperationsParser.AffectboolContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code affectbool}
+	 * labeled alternative in {@link ArrayOperationsParser#affectation}.
+	 * @param ctx the parse tree
+	 */
+	void exitAffectbool(ArrayOperationsParser.AffectboolContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ArrayOperationsParser#varout}.
 	 * @param ctx the parse tree

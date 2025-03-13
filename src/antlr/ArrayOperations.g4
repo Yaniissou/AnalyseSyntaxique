@@ -25,14 +25,17 @@ simpleop        : SUM   (array | ID)   ';'     #sum
                 | SECMAX (array | ID)  ';'     #secmax
                 ;
 
-vardecl         : ARRAY_TYPE ID ';'     #vararray
-                | ARRAY_TYPE ID '=' array ';' #initvararray
-                | INT_TYPE ID ';'       #varint
-                | INT_TYPE ID '=' INT ';' #initvarint
+vardecl         : ARRAY_TYPE ID ';'             #vararray
+                | ARRAY_TYPE ID '=' array ';'   #initvararray
+                | INT_TYPE ID ';'               #varint
+                | INT_TYPE ID '=' INT ';'       #initvarint
+                | BOOL_TYPE ID ';'              #varbool
+                | BOOL_TYPE ID '=' BOOL ';'    #initvarbool
                 ;
 affectation     : ID '=' simpleop       #affectsimpleop
                 | ID '=' array ';'      #affectarray
                 | ID '=' INT ';'        #affectint
+                | ID '=' BOOL ';'       #affectbool
                 ;
 varout          : ID    ';'
                 ;
@@ -42,6 +45,10 @@ INT : '0' | [1-9][0-9]* ;
 // Define token INT as 0 or [1-9] followed by digits
 // KEYWORDS, before other "words" because of the top-down match
 // we want to recognize them first, if not a keyword then something else
+
+BOOL_TYPE       : 'bool';
+BOOL            : 'true' | 'false';
+
 SUM             : 'sum';
 PROD            : 'prod';
 MAX             : 'max';

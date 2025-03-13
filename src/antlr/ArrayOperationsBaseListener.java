@@ -221,6 +221,30 @@ public class ArrayOperationsBaseListener implements ArrayOperationsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterVarbool(ArrayOperationsParser.VarboolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVarbool(ArrayOperationsParser.VarboolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInitvarbool(ArrayOperationsParser.InitvarboolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInitvarbool(ArrayOperationsParser.InitvarboolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAffectsimpleop(ArrayOperationsParser.AffectsimpleopContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -252,6 +276,18 @@ public class ArrayOperationsBaseListener implements ArrayOperationsListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAffectint(ArrayOperationsParser.AffectintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAffectbool(ArrayOperationsParser.AffectboolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAffectbool(ArrayOperationsParser.AffectboolContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
