@@ -1,4 +1,4 @@
-// Generated from /home/yanissou/r6a08/harkatiy-projet/src/antlr/ArrayOperations.g4 by ANTLR 4.13.2
+// Generated from D:/Projets/AnalyseSyntaxique/src/antlr/ArrayOperations.g4 by ANTLR 4.13.2
 package antlr;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -137,6 +137,30 @@ public interface ArrayOperationsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMed(ArrayOperationsParser.MedContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code secmin}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 */
+	void enterSecmin(ArrayOperationsParser.SecminContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code secmin}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 */
+	void exitSecmin(ArrayOperationsParser.SecminContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code secmax}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 */
+	void enterSecmax(ArrayOperationsParser.SecmaxContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code secmax}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 */
+	void exitSecmax(ArrayOperationsParser.SecmaxContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code vararray}
 	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.

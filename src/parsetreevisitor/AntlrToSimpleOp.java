@@ -68,4 +68,24 @@ public class AntlrToSimpleOp extends ArrayOperationsBaseVisitor<SimpleOp> {
         median.setData(accept);
         return median;
     }
+
+    @Override
+    public SimpleOp visitSecmax(ArrayOperationsParser.SecmaxContext ctx) {
+        final AntlrToArray antlrToArray = new AntlrToArray();
+        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
+
+        final SecondMax secondMax = new SecondMax();
+        secondMax.setData(accept);
+        return secondMax;
+    }
+
+    @Override
+    public SimpleOp visitSecmin(ArrayOperationsParser.SecminContext ctx) {
+        final AntlrToArray antlrToArray = new AntlrToArray();
+        final ArrayList<Integer> accept = ctx.getChild(1).accept(antlrToArray);
+
+        final SecondMin secondMin = new SecondMin();
+        secondMin.setData(accept);
+        return secondMin;
+    }
 }

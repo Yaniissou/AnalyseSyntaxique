@@ -1,4 +1,4 @@
-// Generated from /home/yanissou/r6a08/harkatiy-projet/src/antlr/ArrayOperations.g4 by ANTLR 4.13.2
+// Generated from D:/Projets/AnalyseSyntaxique/src/antlr/ArrayOperations.g4 by ANTLR 4.13.2
 package antlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -86,6 +86,20 @@ public interface ArrayOperationsVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMed(ArrayOperationsParser.MedContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code secmin}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSecmin(ArrayOperationsParser.SecminContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code secmax}
+	 * labeled alternative in {@link ArrayOperationsParser#simpleop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSecmax(ArrayOperationsParser.SecmaxContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code vararray}
 	 * labeled alternative in {@link ArrayOperationsParser#vardecl}.

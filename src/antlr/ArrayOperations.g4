@@ -21,6 +21,8 @@ simpleop        : SUM   array   ';'     #sum
                 | MIN   array   ';'     #min
                 | SORT  array   ';'     #sort
                 | MED   array   ';'     #med
+                | SECMIN array  ';'     #secmin
+                | SECMAX array  ';'     #secmax
                 ;
 
 vardecl         : ARRAY_TYPE ID ';'     #vararray
@@ -48,6 +50,8 @@ SORT            : 'sort';
 ARRAY_TYPE      : 'array';
 INT_TYPE        : 'int';// IDENTIFIERS, after the keywords
 MED             : 'med';
+SECMIN          : 'secmin';
+SECMAX          : 'secmax';
 ID              : [a-z][a-zA-Z0-9_]*;
 WS              : [ \t\r\n]+ -> skip ;
 // Define whitespace rule, toss it out

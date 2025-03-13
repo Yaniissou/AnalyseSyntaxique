@@ -73,4 +73,30 @@ public class ArrayOperationsDoInterpretVisitor implements ArrayOperationsVisitor
         final ArrayList<Integer> data = median.getData();
         return data.get(data.size()/2);
     }
+
+    @Override
+    public Object visit(SecondMin secondMin) {
+        // Return the second minimum value, handle the case where the list has less than 2 elements
+        //Use a new ArrayList, since we want to sort the list for this case, and we don't want to modify the original list
+        final ArrayList<Integer> data = new ArrayList<>(secondMin.getData());
+        if (data.size() < 2) {
+            return null;
+        }
+        Collections.sort(data);
+        return data.get(1);
+
+    }
+
+    @Override
+    public Object visit(SecondMax secondMax) {
+        // Return the second maximum value, handle the case where the list has less than 2 elements
+        final ArrayList<Integer> data = secondMax.getData();
+        if (data.size() < 2) {
+            return null;
+        }
+        return data.get(data.size()-2
+        );
+    }
+
+
 }

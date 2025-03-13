@@ -14,4 +14,6 @@ public interface ArrayOperationsVisitor<R> {
     R visit(Affectation<?> affectation);
     R visit(VarOut varOut);
     R visit(Median median);
+    R visit(SecondMin secondMin);
+    R visit(SecondMax secondMax);
 }
