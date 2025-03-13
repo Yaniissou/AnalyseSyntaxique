@@ -4,7 +4,6 @@ import antlr.ArrayOperationsBaseVisitor;
 import antlr.ArrayOperationsParser;
 import model.Program;
 import model.VariableDeclaration;
-import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
