@@ -125,7 +125,6 @@ public class AntlrToAffectation extends ArrayOperationsBaseVisitor<Affectation<?
 
         final String boolType = ctx.getChild(2).getText();
         final boolean value = Boolean.parseBoolean(boolType);
-        System.out.println("boolType: " + boolType + " value: " + value);
         return new Affectation<>(id, value);
     }
 
