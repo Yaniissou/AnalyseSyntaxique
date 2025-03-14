@@ -17,4 +17,9 @@ public class VarOut extends Instruction {
     public String getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return id;
+    }
 }

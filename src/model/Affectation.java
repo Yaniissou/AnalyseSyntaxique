@@ -23,4 +23,9 @@ public class Affectation<T> extends Instruction {
     public Object accept(ArrayOperationsVisitor<?> visitor) {
         return visitor.visit(this);
     }
+
+    @Override
+    public String toString() {
+        return id + " value: " + value;
+    }
 }

@@ -1,0 +1,31 @@
+array a;
+array b = [1, 2, 3, 4, 5];
+int x;
+int y = 10;
+bool flag;
+bool condition = true;
+
+sum b;
+prod b;
+max b;
+min b;
+sort b;
+med b;
+secmin b;
+secmax b;
+
+x = sum b;
+y = prod b;
+x = max b;
+y = min b;
+x = med b;
+y = secmin b;
+x = secmax b;
+
+a = [6, 7, 8, 9, 10];
+y = 42;
+flag = false;
+
+x;
+y;
+flag;
