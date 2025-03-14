@@ -93,7 +93,7 @@ public class AntlrToAffectation extends ArrayOperationsBaseVisitor<Affectation<?
         String varType = symbolTable.get(id).getType();
         //Semantic error handling: variable type must be an int
         if (!varType.equals("int")) {
-            semanticErrors.add(varType + " must be an int");
+            semanticErrors.add(id + " must be an int");
             return null;
         }
         final int value = Integer.parseInt(ctx.getChild(2).getText());
