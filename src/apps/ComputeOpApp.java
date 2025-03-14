@@ -28,6 +28,10 @@ public class ComputeOpApp {
         // use this visitor to visit the parse tree
         // this visitor produce a Model object
             Program result = inputVisitor.visit(tree);
+            if (!inputVisitor.semanticErrors.isEmpty()){
+                inputVisitor.semanticErrors.forEach(System.out::println);
+                return;
+            }
             ArrayOperationsDoInterpretVisitor evaluatevisitor = new ArrayOperationsDoInterpretVisitor();
         // compute the model to get the stack,
         // the final result is at the top of the stack
