@@ -34,7 +34,6 @@ public class ComputeOpApp {
         // the computation is done through an explicit call to the
         // visit method of the commandeLineModel
             evaluatevisitor.visit(result);
-            System.out.println("Output using a VISITOR COMPUTATION of the model:");
         }
 
         // helper method, the same for every grammar
